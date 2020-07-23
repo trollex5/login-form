@@ -14,16 +14,14 @@ function login(data) {
      
     return dispatch => {
 
-        dispatch({ type: userConstants.LOGIN_REQUEST });
-        //console.log("********* ", constants.BASE_URL+'login/getdata/');
-
         requester.post((constants.BASE_URL+constants.LOGIN_URL), false, data)
-            .then(res => {
+            .then((res) => {
+                console.log("++++++++++++++++++++++ ", res);
                 if(res.message !== 'Successfully logged in!') {
                     dispatch({type:userConstants.LOGIN_FAILURE, err:res.message});
                     return;
                 }
-                
+
                 dispatch({type:userConstants.LOGIN_SUCCESS, ...res});
                 sessionStorage.setItem('authtoken',  res.token);  // sessionStorage.getItem("authtoken")
               //  authentication.authenticate();
@@ -43,8 +41,8 @@ function login(data) {
 function register(data) {
      
     return dispatch => {
-        requester.post((constants.BASE_URL+constants.RRGISTRATION_URL), false, data)
-            .then(res => {
+        requester.post((constants.BASE_URL+constants.REGISTRATION_URL), false, data)
+            .then((res) => {
                 if(res.message !== 'User created!') {
                     throw new Error({ status:500, message:res.message });
                 } 
@@ -54,10 +52,6 @@ function register(data) {
             })
             .catch((error) => {
                 console.log('register catch error ', error);
-                /* TODO:
-                    error.status
-                    error.responceJSON.message
-                */
             })
     };
 }

@@ -13,12 +13,12 @@ import constants from '../constants/constants';
 
 
 
-class Login extends Component {   /// export default function SignIn() {
+class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email:'',
+            user_name:'',
             password:''
         }
     }
@@ -37,8 +37,8 @@ class Login extends Component {   /// export default function SignIn() {
 
     handleRegistration = (ev) => {
         ev.preventDefault();
-        
-        this.props.history.push(constants.RRGISTRATION_PAGE_URL);  // redirect to RRGISTRATION
+
+        this.props.history.push(constants.REGISTRATION_PAGE_URL);  // redirect to RRGISTRATION
     }
   
 
@@ -81,10 +81,10 @@ class Login extends Component {   /// export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="user-name"
+                            label="User Name"
+                            name="user_name"
+                            autoComplete="user_name"
                             autoFocus
                             onChange={this.handleChange}
                         />

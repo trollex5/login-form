@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { userActions } from '../actions/userActions';
+import { userConstants } from '../constants/userConstants';
 
 
 
@@ -17,11 +18,12 @@ class Registration extends Component {
         super(props);
 
         this.state = {
+            user_name:'',
             email:'',
-            firstName:'',
-            lastName:'',
+            first_name:'',
+            last_name:'',
             password:'',
-            confirmPassword:''
+            confirm_password:''
         }
     }
 
@@ -35,7 +37,11 @@ class Registration extends Component {
     handleSubmit = (ev) => {
         ev.preventDefault();
         
-        this.props.register(this.state);
+        if(this.state.password === this.state.confirm_password) {
+            this.props.register(this.state);
+        } else {
+            this.props.sendError({ type:userConstants.REGISTER_FAILURE, error:'Password and Confirm Password must be the same!' });
+        }
     }
   
 
@@ -79,10 +85,10 @@ class Registration extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="user-name"
+                            label="User Name"
+                            name="user_name"
+                            autoComplete="user_name"
                             autoFocus
                             onChange={this.handleChange}
                         />
@@ -91,7 +97,18 @@ class Registration extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="firstName"
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            onChange={this.handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="first_name"
                             label="First Name"
                             type="text"
                             id="first-name"
@@ -103,7 +120,7 @@ class Registration extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="lastName"
+                            name="last_name"
                             label="Last Name"
                             type="text"
                             id="last-name"
@@ -127,7 +144,7 @@ class Registration extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="confirmPassword"
+                            name="confirm_password"
                             label="Confirm Password"
                             type="password"
                             id="confirm-password"
